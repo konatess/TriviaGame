@@ -51,6 +51,7 @@
     // choose and display question
     function displayQA() {
         // remove .correct from all answers
+        $(".ans").removeClass("correct")
         // set countdown
         countdown = 10
         // randomly choose a question
@@ -192,19 +193,6 @@
     }
 
     $(document).on("click", ".restartbtn", startOver);
-
-// plan:
-    // click start button to begin
-    // play begins
-        // question displays
-        // answers display
-        // clock begins countdown
-    // on click, answers
-        // clock stops
-        // determines clicked is correct or not
-            // if correct, diplays "yes" and correct answer
-            // if not, displays "no" and correct answer
-        // after 5 seconds, goes to next question
 
 // stretch goals
     // easy, medium and hard option, with different times for each
