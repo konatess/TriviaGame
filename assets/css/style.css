@@ -23,6 +23,7 @@ header, footer {
     position: fixed;
     top: 50%;
     left: 25%;
+    font-size: 1.5em;
 }
 
 .timer {
@@ -32,4 +33,8 @@ header, footer {
 .ans:hover {
     border: solid 2px #555555dd;
     border-radius: 15px;
+}
+
+.hidden {
+    visibility: hidden;
 }
