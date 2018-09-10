@@ -50,6 +50,7 @@
     });
     // choose and display question
     function displayQA() {
+        // remove .correct from all answers
         // set countdown
         countdown = 10
         // randomly choose a question
@@ -172,12 +173,25 @@
     };
         
     // start over function
+    function startOver() {
         // empty .question
+        $(".question").empty();
         // clear doneQues
+        doneQues.length = 0;
         // clear countCorrect
+        countCorrect = 0;
+        console.log(countCorrect)
         // clear countWrong
+        countWrong = 0;
+        console.log(countWrong)
         // clear countTimeouts
+        countTimeouts = 0;
+        console.log(countTimeouts)
         // call displayQA
+        displayQA();
+    }
+
+    $(document).on("click", ".restartbtn", startOver);
 
 // plan:
     // click start button to begin
