@@ -30,8 +30,6 @@
     var currentQues = 0;
     // countdown start
     var countdown = 10;
-    // to keep start button from triggering clearInterval
-    var playing = false;
     // holder for interval function
     var startTimer;
     // count right answers
@@ -91,12 +89,8 @@
         // clock time displays and clock begins countdown
             // set interval
             startTimer = setInterval(displayTime, 1000)
-            playing = true
     }
 
-   
-        
-    
     function displayTime() {
         countdown--
         $(".timer").text(countdown)
@@ -105,68 +99,84 @@
             answer();
         }
     };
+
     // check answer 
     // if answer is clicked, stop timer
     $(".ans").on("click", answer)
+
+    // next step function --> what to do after each option of answer
+    function nextStep() {
+        // if doneQues.length === quesArr.length, call end function
+        if (doneQues.length === quesArr.length) {
+            setTimeout(endQuiz, 3000);
+        }
+        else {
+            setTimeout(displayQA, 3000);
+        }
+    }
+
         
     function answer() {
         // stop timer
         clearInterval(startTimer)
-        // if doneQues.length === quesArr.length, call end function
-        if (doneQues.length === quesArr.length) {
-            endQuiz();
+        // if out of time
+        if (countdown === 0) {
+            // FIXME: timeouts counts up on click
+            $(".ans1").text("Oh no! You ran out of time.");
+            $(".ans2").text("Correct answer is:   " + quesArr[currentQues]['cAns']);
+            $(".ans3").text("");
+            $(".ans4").text("");
+            countTimeouts++;
+            console.log("Timeouts: " +countTimeouts)
+            nextStep();
         }
-        // else 
+        // if clicked before time runs out 
         else {
-            // if out of time
-            if (countdown === 0) {
-                // FIXME: timeouts counts up on click
-                $(".ans1").text("Oh no! You ran out of time.");
-                $(".ans2").text("Correct answer is:   " + quesArr[currentQues]['cAns']);
+            // check answer
+            // if correct
+            if ( $(this).hasClass("correct") ) {
+                $(".ans1").text("Yes, " + quesArr[currentQues]['cAns'] + " is correct!")
+                $(".ans2").text("");
                 $(".ans3").text("");
                 $(".ans4").text("");
-                countTimeouts++;
-                console.log("Timeouts: " +countTimeouts)
-                setTimeout(displayQA, 3000);
+                countCorrect++
+                console.log("countCorrect: " +countCorrect)
+                nextStep();
             }
-            // if clicked before time runs out 
+            // else
             else {
-                // check answer
-                // if correct
-                if ( $(this).hasClass("correct") ) {
-                    $(".ans1").text("Yes, " + quesArr[currentQues]['cAns'] + " is correct!")
-                    $(".ans2").text("");
-                    $(".ans3").text("");
-                    $(".ans4").text("");
-                    countCorrect++
-                    console.log("countCorrect: " +countCorrect)
-                    setTimeout(displayQA, 3000);
-                }
-                // else
-                else {
-                    $(".ans1").text("Oh no! That's not right!")
-                    $(".ans2").text("The correct answer was " + quesArr[currentQues]['cAns'] + ".");
-                    $(".ans3").text("");
-                    $(".ans4").text("");
-                    countWrong++
-                    console.log("countWrong: " +countWrong)
-                    setTimeout(displayQA, 3000);
-                }
+                $(".ans1").text("Oh no! That's not right!")
+                $(".ans2").text("The correct answer was " + quesArr[currentQues]['cAns'] + ".");
+                $(".ans3").text("");
+                $(".ans4").text("");
+                countWrong++
+                console.log("countWrong: " +countWrong)
+                nextStep();
             }
-        };  
+        } 
     };  
+
     // end function
     function endQuiz() {
-        // display "the end" in .question
-        $(".question").text("The End")
+        // display "the end" in .timer
+        $(".timer").text("The End")
         // display "right answers #" in ans1
+        $(".ans1").text("You got " +countCorrect+ " right answers")
         // display "wrong answers #" in ans2
+        $(".ans2").text("You got " +countWrong+ " wrong answers")
         // display "ran out of time # times" in ans3
-        // put "start over" button in ans4
+        $(".ans3").text("You ran out of time " +countTimeouts+ " times")
+        // put "start over" button in .question
+        $(".question").text("")
+        $(".question").append('<button class="restartbtn btn btn-outline-dark btn-lg w-50">restart?</button>')
     };
         
     // start over function
+        // empty .question
         // clear doneQues
+        // clear countCorrect
+        // clear countWrong
+        // clear countTimeouts
         // call displayQA
 
 // plan:
