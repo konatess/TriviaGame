@@ -29,7 +29,7 @@
     // tracker for current question as index of quesArr
     var currentQues = 0;
     // countdown start
-    var countdown = 10;
+    var countdown = 30;
     // holder for interval function
     var startTimer;
     // count right answers
@@ -54,11 +54,10 @@
     function displayQA() {
         $(".ans").addClass("hoverable")
         clickable = true;
-        console.log("Clickable = " + clickable)
         // remove .correct from all answers
         $(".ans").removeClass("correct")
         // set countdown
-        countdown = 10
+        countdown = 30;
         // randomly choose a question
         var fulfilled = false;
         while (fulfilled === false) {
@@ -84,8 +83,7 @@
             else {
                 j--
             }
-        }
-        console.log(b);
+        };
         $(ansDivsArr[ b[0] ]).text(quesArr[currentQues]['cAns']);
         $(ansDivsArr[ b[0] ]).addClass("correct")
         for (var i = 1; i < ansDivsArr.length; i++ ) {   
@@ -138,7 +136,6 @@
                 $(".ans3").text("");
                 $(".ans4").text("");
                 countTimeouts++;
-                console.log("Timeouts: " +countTimeouts)
                 nextStep();
             }
             // if clicked before time runs out 
@@ -151,7 +148,6 @@
                     $(".ans3").text("");
                     $(".ans4").text("");
                     countCorrect++
-                    console.log("countCorrect: " +countCorrect)
                     nextStep();
                 }
                 // else
@@ -161,7 +157,6 @@
                     $(".ans3").text("");
                     $(".ans4").text("");
                     countWrong++
-                    console.log("countWrong: " +countWrong)
                     nextStep();
                 }
             } 
@@ -193,13 +188,10 @@
         doneQues.length = 0;
         // clear countCorrect
         countCorrect = 0;
-        console.log(countCorrect)
         // clear countWrong
         countWrong = 0;
-        console.log(countWrong)
         // clear countTimeouts
         countTimeouts = 0;
-        console.log(countTimeouts)
         // call displayQA
         displayQA();
     }
