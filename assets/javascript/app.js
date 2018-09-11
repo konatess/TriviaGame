@@ -19,6 +19,21 @@
             ques: "Which of these muscles is the strongest?",
             cAns: "masseter",
             wAns: ["biceps brachii", "rectus abdominis", "flexor digitorum profundus"]
+        },
+        {
+            ques: "Of the rotator cuff muscles, which one does NOT rotate the humerus?",
+            cAns: "supraspinatus",
+            wAns: ["infraspinatus", "teres minor", "subscapularis"]
+        },
+        {
+            ques: "Which quadriceps muscle crosses the hip?",
+            cAns: "rectus femoris",
+            wAns: ["vastus lateralis", "vastus intermedius", "vastus medialis"]
+        },
+        {
+            ques: "Which muscle is the shortest?",
+            cAns: "stapedius",
+            wAns: ["flexor digiti minimi", "adductor brevis", "geniohyoid"]
         }
     ]
 
@@ -115,10 +130,10 @@
         console.log("Clickable = " + clickable);
         // if doneQues.length === quesArr.length, call end function
         if (doneQues.length === quesArr.length) {
-            setTimeout(endQuiz, 3000);
+            setTimeout(endQuiz, 4000);
         }
         else {
-            setTimeout(displayQA, 3000);
+            setTimeout(displayQA, 4000);
         }
     }
 
