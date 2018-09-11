@@ -38,6 +38,8 @@
     var countWrong = 0;
     // count time outs
     var countTimeouts = 0;
+    // to keep things from being clickable after answer shows
+    var clickable = false
 
 
 // functions
@@ -50,6 +52,9 @@
     });
     // choose and display question
     function displayQA() {
+        $(".ans").addClass("hoverable")
+        clickable = true;
+        console.log("Clickable = " + clickable)
         // remove .correct from all answers
         $(".ans").removeClass("correct")
         // set countdown
@@ -108,6 +113,8 @@
 
     // next step function --> what to do after each option of answer
     function nextStep() {
+        clickable = false;
+        console.log("Clickable = " + clickable);
         // if doneQues.length === quesArr.length, call end function
         if (doneQues.length === quesArr.length) {
             setTimeout(endQuiz, 3000);
@@ -121,45 +128,50 @@
     function answer() {
         // stop timer
         clearInterval(startTimer)
+        // make the hover effects disappear from answer divs
+        $(".ans").removeClass("hoverable");
         // if out of time
-        if (countdown === 0) {
-            // FIXME: timeouts counts up on click
-            $(".ans1").text("Oh no! You ran out of time.");
-            $(".ans2").text("Correct answer is:   " + quesArr[currentQues]['cAns']);
-            $(".ans3").text("");
-            $(".ans4").text("");
-            countTimeouts++;
-            console.log("Timeouts: " +countTimeouts)
-            nextStep();
-        }
-        // if clicked before time runs out 
-        else {
-            // check answer
-            // if correct
-            if ( $(this).hasClass("correct") ) {
-                $(".ans1").text("Yes, " + quesArr[currentQues]['cAns'] + " is correct!")
-                $(".ans2").text("");
+        if (clickable === true) {
+            if (countdown === 0) {
+                $(".ans1").text("Oh no! You ran out of time.");
+                $(".ans2").text("Correct answer is:   " + quesArr[currentQues]['cAns']);
                 $(".ans3").text("");
                 $(".ans4").text("");
-                countCorrect++
-                console.log("countCorrect: " +countCorrect)
+                countTimeouts++;
+                console.log("Timeouts: " +countTimeouts)
                 nextStep();
             }
-            // else
+            // if clicked before time runs out 
             else {
-                $(".ans1").text("Oh no! That's not right!")
-                $(".ans2").text("The correct answer was " + quesArr[currentQues]['cAns'] + ".");
-                $(".ans3").text("");
-                $(".ans4").text("");
-                countWrong++
-                console.log("countWrong: " +countWrong)
-                nextStep();
-            }
-        } 
+                // check answer
+                // if correct
+                if ( $(this).hasClass("correct") ) {
+                    $(".ans1").text("Yes, " + quesArr[currentQues]['cAns'] + " is correct!")
+                    $(".ans2").text("");
+                    $(".ans3").text("");
+                    $(".ans4").text("");
+                    countCorrect++
+                    console.log("countCorrect: " +countCorrect)
+                    nextStep();
+                }
+                // else
+                else {
+                    $(".ans1").text("Oh no! That's not right!")
+                    $(".ans2").text("The correct answer was " + quesArr[currentQues]['cAns'] + ".");
+                    $(".ans3").text("");
+                    $(".ans4").text("");
+                    countWrong++
+                    console.log("countWrong: " +countWrong)
+                    nextStep();
+                }
+            } 
+        }
     };  
 
     // end function
     function endQuiz() {
+        clickable = false;
+        console.log("clickable = " + clickable)
         // display "the end" in .timer
         $(".timer").text("The End")
         // display "right answers #" in ans1
@@ -196,3 +208,4 @@
 
 // stretch goals
     // easy, medium and hard option, with different times for each
+    // 

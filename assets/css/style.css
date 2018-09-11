@@ -30,7 +30,7 @@ header, footer {
     padding-top: .5em;
 }
 
-.ans:hover {
+.hoverable:hover {
     border: solid 2px #555555dd;
     border-radius: 15px;
 }
