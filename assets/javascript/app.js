@@ -34,6 +34,16 @@
             ques: "Which muscle is the shortest?",
             cAns: "stapedius",
             wAns: ["flexor digiti minimi", "adductor brevis", "geniohyoid"]
+        },
+        {
+            ques: "Which muscle's name means 'broadest (muscle) of the back'?",
+            cAns: "latissimus dorsi",
+            wAns: ["trapizius", "vastus posterior", "gluteus maximus"]
+        },
+        {
+            ques: "Which of these muscles is not a rotator cuff muscle?",
+            cAns: "pec minor",
+            wAns: ["supraspinatus", "teres minor", "subscapularis"]
         }
     ]
 
